@@ -1,20 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
-import PlanetsContext from '../context/PlanetsContext';
+import useNameFilter from '../hooks/useNameFilter';
 
 function NameFilter() {
-  const {
-    initialList,
-    applyFilter,
-  } = useContext(PlanetsContext);
-
-  const [nameFilter, setNameFilter] = useState<string>('');
-
-  useEffect(() => {
-    const newList = initialList
-      .filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
-
-    applyFilter(newList);
-  }, [nameFilter]);
+  const [nameFilter, setNameFilter] = useNameFilter();
 
   return (
     <div>
@@ -23,6 +10,7 @@ function NameFilter() {
         type="text"
         value={ nameFilter }
         onChange={ ({ target }) => setNameFilter(target.value) }
+        placeholder="Enter planet name"
       />
     </div>
   );

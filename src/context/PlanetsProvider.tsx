@@ -11,6 +11,7 @@ type PlanetsProviderProps = {
 function PlanetsProvider({ children }: PlanetsProviderProps) {
   const { data, error, isLoading } = useFetch(fetchPlanets);
 
+  const [filteredByName, setFilteredByName] = useState<PlanetType[]>([]);
   const [filteredPlanets, setFilteredPlanets] = useState<PlanetType[]>([]);
   const [initialList, setInitialList] = useState<PlanetType[]>([]);
 
@@ -25,15 +26,20 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
 
   const clearFilter = () => setFilteredPlanets(initialList);
 
-  const applyFilter = (newList: PlanetType[]) => setFilteredPlanets(newList);
+  const applyNameFilter = (newList: PlanetType[]) => setFilteredByName(newList);
+
+  const applyFilters = (newList: PlanetType[]) => setFilteredPlanets(newList);
 
   const values = {
     initialList,
+    filteredByName,
     filteredPlanets,
     isLoading,
     error,
-    applyFilter,
+    applyFilters,
+    applyNameFilter,
     clearFilter,
+    setFilteredPlanets,
   };
 
   return (
