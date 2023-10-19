@@ -40,7 +40,13 @@ function Table() {
         {filteredPlanets.map((planet: PlanetType) => (
           <tr key={ planet.name }>
             {Object.values(planet).map((attribute: string | any) => (
-              <td key={ attribute }>{attribute}</td>))}
+              <td
+                key={ attribute }
+                data-testid={ attribute === 'name' ? 'planet-name' : '' }
+              >
+                {attribute}
+
+              </td>))}
           </tr>
         ))}
       </tbody>

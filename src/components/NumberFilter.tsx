@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NumberFilterType } from '../types';
 import useNumberFilters from '../hooks/useNumberFilters';
 
-const columnOptions = [
+const initialColumnsOptions = [
   'population',
   'orbital_period',
   'diameter',
@@ -12,17 +12,17 @@ const columnOptions = [
 
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
-const INITIAL_STATE = {
-  column: columnOptions[0],
-  comparison: comparisonOptions[0],
-  parameter: 0,
-
-};
-
 function NumberFilter() {
   const [numberFilters, setNumberFilters] = useNumberFilters();
 
-  const [filterForm, setFilterForm] = useState<NumberFilterType>(INITIAL_STATE);
+  const [columnsOptions, setColumnsOptions] = useState<string[]>(initialColumnsOptions);
+
+  const [filterForm, setFilterForm] = useState<NumberFilterType>({
+    column: columnsOptions[0],
+    comparison: comparisonOptions[0],
+    parameter: 0,
+  });
+
   const { column, comparison, parameter } = filterForm;
 
   const handleChange = (
@@ -38,9 +38,16 @@ function NumberFilter() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const newColumns = columnsOptions.filter((option) => option !== filterForm.column);
+    setColumnsOptions(newColumns);
+
     setNumberFilters((previous) => [...previous, filterForm]);
 
-    setFilterForm(INITIAL_STATE);
+    setFilterForm({
+      column: newColumns[0],
+      comparison: comparisonOptions[0],
+      parameter: 0,
+    });
   };
 
   return (
@@ -54,7 +61,7 @@ function NumberFilter() {
           value={ column }
           onChange={ handleChange }
         >
-          {columnOptions.map((option) => <option key={ option }>{option}</option>)}
+          {columnsOptions.map((option) => <option key={ option }>{option}</option>)}
         </select>
 
         <label htmlFor="comparison">Comparison</label>
@@ -86,7 +93,10 @@ function NumberFilter() {
 
       <div>
         {numberFilters.map((filter) => (
-          <div key={ filter.column }>
+          <div
+            key={ filter.column }
+            data-testid="filter"
+          >
             <span>
               {
               `You filtered for ${filter.column} ${filter.comparison} ${filter.parameter}`
