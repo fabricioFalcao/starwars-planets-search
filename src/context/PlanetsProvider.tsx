@@ -16,12 +16,14 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
   const [filteredPlanets, setFilteredPlanets] = useState<PlanetType[]>([]);
 
   useEffect(() => {
-    const planetsList: PlanetType[] = data.map((planet) => {
-      delete planet.residents;
-      return planet;
-    });
-    setInitialList(planetsList);
-    setFilteredPlanets(planetsList);
+    if (data.length > 0) {
+      const planetsList: PlanetType[] = data.map((planet) => {
+        delete planet.residents;
+        return planet;
+      });
+      setInitialList(planetsList);
+      setFilteredPlanets(planetsList);
+    }
   }, [data]);
 
   const clearFilter = () => setFilteredPlanets(initialList);
