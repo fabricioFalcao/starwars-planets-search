@@ -33,9 +33,9 @@ function useNumberFilters(): UseNumberFiltersType {
       return filtering.every((result) => result);
     };
 
-    const newList = filteredByName.filter(applyNumberFilters);
+    const newList = filteredByName?.filter(applyNumberFilters);
 
-    applyFilters(newList);
+    // applyFilters(newList);
   }, [numberFilters, filteredByName, applyFilters]);
 
   return [numberFilters, setNumberFilters];
