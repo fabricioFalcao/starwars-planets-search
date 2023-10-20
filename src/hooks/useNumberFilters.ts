@@ -35,7 +35,7 @@ function useNumberFilters(): UseNumberFiltersType {
 
     const newList = filteredByName?.filter(applyNumberFilters);
 
-    // applyFilters(newList);
+    applyFilters(newList);
   }, [numberFilters, filteredByName, applyFilters]);
 
   return [numberFilters, setNumberFilters];

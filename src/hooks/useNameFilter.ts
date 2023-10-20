@@ -7,16 +7,22 @@ function useNameFilter(): UseNameFilterType {
   const {
     initialList,
     applyNameFilter,
+    isLoading,
   } = useContext(PlanetsContext);
+
+  console.log(initialList);
+  console.log(applyNameFilter);
 
   const [nameFilter, setNameFilter] = useState<string>('');
 
   useEffect(() => {
-    const newList = initialList
-      ?.filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
+    if (!isLoading && initialList?.length > 0) {
+      const newList = initialList
+        ?.filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
 
-    applyNameFilter(newList);
-  }, [applyNameFilter, initialList, nameFilter]);
+      applyNameFilter(newList);
+    }
+  }, [nameFilter]);
 
   return [nameFilter, setNameFilter];
 }

@@ -14,7 +14,7 @@ const initialColumnsOptions = [
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
 function NumberFilter() {
-  const { clearFilter } = useContext(PlanetsContext);
+  const { clearFilter, isLoading } = useContext(PlanetsContext);
   const [numberFilters, setNumberFilters] = useNumberFilters();
 
   const [columnsOptions, setColumnsOptions] = useState<string[]>(initialColumnsOptions);
@@ -40,16 +40,18 @@ function NumberFilter() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newColumns = columnsOptions.filter((option) => option !== filterForm.column);
-    setColumnsOptions(newColumns);
+    if (!isLoading) {
+      const newColumns = columnsOptions.filter((option) => option !== filterForm.column);
+      setColumnsOptions(newColumns);
 
-    setNumberFilters((previous) => [...previous, filterForm]);
+      setNumberFilters((previous) => [...previous, filterForm]);
 
-    setFilterForm({
-      column: newColumns[0],
-      comparison: comparisonOptions[0],
-      parameter: 0,
-    });
+      setFilterForm({
+        column: newColumns[0],
+        comparison: comparisonOptions[0],
+        parameter: 0,
+      });
+    }
   };
 
   const handleDeleteFilter = (restoredColumn: string) => {
