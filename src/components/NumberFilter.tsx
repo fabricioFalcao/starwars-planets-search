@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NumberFilterType } from '../types';
 import useNumberFilters from '../hooks/useNumberFilters';
+import PlanetsContext from '../context/PlanetsContext';
 
 const initialColumnsOptions = [
   'population',
@@ -13,6 +14,7 @@ const initialColumnsOptions = [
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
 function NumberFilter() {
+  const { clearFilter } = useContext(PlanetsContext);
   const [numberFilters, setNumberFilters] = useNumberFilters();
 
   const [columnsOptions, setColumnsOptions] = useState<string[]>(initialColumnsOptions);
@@ -50,6 +52,22 @@ function NumberFilter() {
     });
   };
 
+  const handleDeleteFilter = (restoredColumn: string) => {
+    setColumnsOptions((previous) => [...previous, restoredColumn]);
+
+    const keptFilters = numberFilters
+      .filter((filter) => filter.column !== restoredColumn);
+
+    setNumberFilters(keptFilters);
+  };
+
+  const handleReset = () => {
+    setColumnsOptions(initialColumnsOptions);
+
+    setNumberFilters([]);
+
+    clearFilter();
+  };
   return (
     <section>
       <form onSubmit={ handleSubmit }>
@@ -102,10 +120,23 @@ function NumberFilter() {
               `You filtered for ${filter.column} ${filter.comparison} ${filter.parameter}`
               }
             </span>
-            <button>Delete</button>
+            <button
+              onClick={ () => handleDeleteFilter(filter.column) }
+            >
+              Delete
+
+            </button>
           </div>
         ))}
       </div>
+
+      <button
+        onClick={ handleReset }
+        data-testid="button-remove-filters"
+      >
+        Remover todas filtragens
+
+      </button>
     </section>
   );
 }

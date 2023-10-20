@@ -37,7 +37,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {filteredPlanets.map((planet: PlanetType) => (
+        {filteredPlanets?.map((planet: PlanetType) => (
           <tr key={ planet.name }>
             {Object.values(planet).map((attribute: string | any) => (
               <td

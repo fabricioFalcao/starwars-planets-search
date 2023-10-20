@@ -11,9 +11,9 @@ type PlanetsProviderProps = {
 function PlanetsProvider({ children }: PlanetsProviderProps) {
   const { data, error, isLoading } = useFetch(fetchPlanets);
 
+  const [initialList, setInitialList] = useState<PlanetType[]>([]);
   const [filteredByName, setFilteredByName] = useState<PlanetType[]>([]);
   const [filteredPlanets, setFilteredPlanets] = useState<PlanetType[]>([]);
-  const [initialList, setInitialList] = useState<PlanetType[]>([]);
 
   useEffect(() => {
     const planetsList: PlanetType[] = data.map((planet) => {

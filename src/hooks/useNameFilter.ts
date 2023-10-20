@@ -13,7 +13,7 @@ function useNameFilter(): UseNameFilterType {
 
   useEffect(() => {
     const newList = initialList
-      .filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
+      ?.filter(({ name }) => name.toLowerCase().includes(nameFilter.toLowerCase()));
 
     applyNameFilter(newList);
   }, [applyNameFilter, initialList, nameFilter]);

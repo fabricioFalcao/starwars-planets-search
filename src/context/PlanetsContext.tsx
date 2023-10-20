@@ -7,8 +7,8 @@ type PlanetsContextType = {
   filteredPlanets: PlanetType[],
   isLoading: boolean;
   error: string | null;
-  applyNameFilter:(newList: PlanetType[]) => void,
   applyFilters: (newList: PlanetType[]) => void,
+  applyNameFilter:(newList: PlanetType[]) => void,
   clearFilter: () => void,
   setFilteredPlanets: React.Dispatch<React.SetStateAction<PlanetType[]>>,
 };
