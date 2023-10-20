@@ -22,6 +22,7 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
         return planet;
       });
       setInitialList(planetsList);
+      setFilteredByName(planetsList);
       setFilteredPlanets(planetsList);
     }
   }, [data]);
