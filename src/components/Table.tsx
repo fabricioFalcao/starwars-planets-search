@@ -19,7 +19,7 @@ const tableHeader = [
 ];
 
 function Table() {
-  const { filteredPlanets, isLoading, error } = useContext(PlanetsContext);
+  const { isLoading, error, filteredByName } = useContext(PlanetsContext);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -37,7 +37,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {filteredPlanets?.map((planet: PlanetType) => (
+        {filteredByName?.map((planet: PlanetType) => (
           <tr key={ planet.name }>
             {Object.values(planet).map((attribute: string | any, index) => (
               <td

@@ -5,11 +5,17 @@ import PlanetsContext from '../context/PlanetsContext';
 type UseFilterAndSortType = {
   numberFilters: NumberFilterType[],
   setNumberFilters: React.Dispatch<React.SetStateAction<NumberFilterType[]>>,
+  sortColumns: SortType,
   setSortColumns: React.Dispatch<React.SetStateAction<SortType>>
 };
 
 function useFilterAndSort(): UseFilterAndSortType {
-  const { filteredByName, applyFilters } = useContext(PlanetsContext);
+  const {
+    applyFilters,
+    initialList,
+    filteredPlanets,
+    sortList,
+  } = useContext(PlanetsContext);
 
   const [numberFilters, setNumberFilters] = useState<NumberFilterType[]>([]);
   const [sortColumns, setSortColumns] = useState<SortType>({ column: '', sort: '' });
@@ -35,8 +41,17 @@ function useFilterAndSort(): UseFilterAndSortType {
   };
 
   useEffect(() => {
-    if (filteredByName?.length > 0) {
-      const newList = filteredByName.filter(applyNumberFilters).sort((a, b) => {
+    if (initialList?.length > 0) {
+      const newList = initialList.filter(applyNumberFilters);
+
+      applyFilters(newList);
+    }
+  }, [numberFilters]);
+
+  useEffect(() => {
+    if (filteredPlanets?.length > 0) {
+      const newArr = [...filteredPlanets];
+      const sortedList = newArr.sort((a, b) => {
         if (a[column] === 'unknown') return 1;
         if (b[column] === 'unknown') return -1;
         if (sort === 'ASC') return Number(a[column]) - Number(b[column]);
@@ -44,12 +59,11 @@ function useFilterAndSort(): UseFilterAndSortType {
         return 1;
       });
 
-      applyFilters(newList);
-      console.log(newList);
+      sortList(sortedList);
     }
-  }, [numberFilters, filteredByName, sortColumns]);
+  }, [sortColumns, filteredPlanets]);
 
-  return { numberFilters, setNumberFilters, setSortColumns };
+  return { numberFilters, setNumberFilters, sortColumns, setSortColumns };
 }
 
 export default useFilterAndSort;

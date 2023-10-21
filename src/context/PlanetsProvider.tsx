@@ -12,8 +12,9 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
   const { data, error, isLoading } = useFetch(fetchPlanets);
 
   const [initialList, setInitialList] = useState<PlanetType[]>([]);
-  const [filteredByName, setFilteredByName] = useState<PlanetType[]>([]);
   const [filteredPlanets, setFilteredPlanets] = useState<PlanetType[]>([]);
+  const [sortedPlanets, setSortedPlanets] = useState<PlanetType[]>([]);
+  const [filteredByName, setFilteredByName] = useState<PlanetType[]>([]);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -22,24 +23,29 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
         return planet;
       });
       setInitialList(planetsList);
-      setFilteredByName(planetsList);
       setFilteredPlanets(planetsList);
+      setSortedPlanets(planetsList);
+      setFilteredByName(planetsList);
     }
   }, [data]);
 
   const clearFilter = () => setFilteredPlanets(initialList);
 
-  const applyNameFilter = (newList: PlanetType[]) => setFilteredByName(newList);
-
   const applyFilters = (newList: PlanetType[]) => setFilteredPlanets(newList);
+
+  const sortList = (newList: PlanetType[]) => setSortedPlanets(newList);
+
+  const applyNameFilter = (newList: PlanetType[]) => setFilteredByName(newList);
 
   const values = {
     initialList,
-    filteredByName,
     filteredPlanets,
+    sortedPlanets,
+    filteredByName,
     isLoading,
     error,
     applyFilters,
+    sortList,
     applyNameFilter,
     clearFilter,
     setFilteredPlanets,
