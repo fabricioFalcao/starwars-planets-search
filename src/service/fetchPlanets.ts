@@ -4,10 +4,6 @@ const fetchPlanets = async () => {
   try {
     const response = await fetch(endpoint);
 
-    if (!response.ok) {
-      throw new Error('Unable to fetch data');
-    }
-
     const data = await response.json();
     return data.results;
   } catch (error) {

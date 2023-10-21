@@ -33,8 +33,6 @@ function PlanetsProvider({ children }: PlanetsProviderProps) {
 
   const applyFilters = (newList: PlanetType[]) => setFilteredPlanets(newList);
 
-  console.log(filteredPlanets);
-
   const values = {
     initialList,
     filteredByName,
