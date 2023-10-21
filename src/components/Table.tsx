@@ -39,10 +39,10 @@ function Table() {
       <tbody>
         {filteredPlanets?.map((planet: PlanetType) => (
           <tr key={ planet.name }>
-            {Object.values(planet).map((attribute: string | any) => (
+            {Object.values(planet).map((attribute: string | any, index) => (
               <td
                 key={ attribute }
-                data-testid={ attribute === 'name' ? 'planet-name' : '' }
+                data-testid={ index === 0 ? 'planet-name' : '' }
               >
                 {attribute}
 

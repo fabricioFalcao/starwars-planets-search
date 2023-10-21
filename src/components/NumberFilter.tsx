@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { NumberFilterType } from '../types';
-import useNumberFilters from '../hooks/useNumberFilters';
 import PlanetsContext from '../context/PlanetsContext';
+import useFilterAndSort from '../hooks/useFilterAndSort';
 
 const initialColumnsOptions = [
   'population',
@@ -15,7 +15,7 @@ const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
 function NumberFilter() {
   const { clearFilter, isLoading } = useContext(PlanetsContext);
-  const [numberFilters, setNumberFilters] = useNumberFilters();
+  const { numberFilters, setNumberFilters } = useFilterAndSort();
 
   const [columnsOptions, setColumnsOptions] = useState<string[]>(initialColumnsOptions);
 

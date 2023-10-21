@@ -19,3 +19,8 @@ export type NumberFilterType = {
   comparison: string,
   parameter: number,
 };
+
+export type SortType = {
+  column: string,
+  sort: string
+};
