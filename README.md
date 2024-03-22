@@ -1,10 +1,23 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+### Star Wars Planets List Project
+
+👨‍💻 **What was developed**
+
+In this project, you will develop a list with filters of planets from the Star Wars universe using Context API and Hooks to control global states.
+
+📝 **Skills**
+
+In this project, you will:
+
+- Use React's Context API to manage state.
+- Use the useState React Hook.
+- Use the useContext React Hook.
+- Use the useEffect React Hook.
+- Create custom React Hooks.
+- Write tests to ensure that your application has good test coverage.
+
+⚛️ **Technologies and Tools**
+
+- React.js
+- Context API
+- React Hooks (useState, useContext, useEffect)
+- Testing Library (e.g., Jest)
