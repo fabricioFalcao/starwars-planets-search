@@ -2,7 +2,7 @@
 
 👨‍💻 **What was developed**
 
-In this project, I develop a list with filters of planets from the Star Wars universe using Context API and Hooks to control global states.
+In this project, I developed a list with filters of planets from the Star Wars universe using Context API and Hooks to control global states.
 
 📝 **Skills**
 
@@ -12,7 +12,7 @@ In this project, you will find:
 - Use the useState React Hook.
 - Use the useContext React Hook.
 - Use the useEffect React Hook.
-- Creation of custom React Hooks.
+- Custom React Hooks.
 - Writen tests to ensure that your application has good test coverage.
 
 ⚛️ **Technologies and Tools**
